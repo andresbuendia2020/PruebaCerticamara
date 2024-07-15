@@ -1,0 +1,96 @@
+.book-list {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+  }
+
+  ul {
+    list-style-type: none;
+    padding: 0;
+
+    li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid #ddd;
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      .book-details {
+        display: flex;
+        flex-direction: column;
+
+        .book-title {
+          font-weight: bold;
+          color: #2c3e50;
+        }
+
+        .book-author, .book-date {
+          font-size: 0.9em;
+          color: #7f8c8d;
+        }
+      }
+
+      .book-actions {
+        display: flex;
+
+        .btn {
+          margin-left: 10px;
+          padding: 5px 10px;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+          transition: background 0.3s;
+
+          &.delete-btn {
+            background: #e74c3c;
+            color: #fff;
+
+            &:hover {
+              background: #c0392b;
+            }
+          }
+
+          &.edit-btn {
+            background: #3498db;
+            color: #fff;
+
+            &:hover {
+              background: #2980b9;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .add-btn {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background: #2ecc71;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s;
+    text-align: center;
+    font-size: 1.1em;
+    margin-top: 20px;
+
+    &:hover {
+      background: #27ae60;
+    }
+  }
+}

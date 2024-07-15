@@ -1,4 +1,4 @@
-<div>
+<!-- <div>
   <h2>Lista de Libros</h2>
   <ul>
     <li *ngFor="let book of books">
@@ -8,4 +8,21 @@
     </li>
   </ul>
   <button [routerLink]="['/add']">Agregar Libro</button>
+</div> -->
+<div class="book-list">
+  <h2>Lista de Libros</h2>
+  <ul>
+    <li *ngFor="let book of books">
+      <div class="book-details">
+        <span class="book-title">{{ book.title }}</span>
+        <span class="book-author">{{ book.author }}</span>
+        <span class="book-date">{{ book.publishedDate }}</span>
+      </div>
+      <div class="book-actions">
+        <button class="btn delete-btn" (click)="deleteBook(book.id)">Eliminar</button>
+        <button class="btn edit-btn" [routerLink]="['/edit', book.id]">Editar</button>
+      </div>
+    </li>
+  </ul>
+  <button class="btn add-btn" [routerLink]="['/add']">Agregar Libro</button>
 </div>

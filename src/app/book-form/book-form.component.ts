@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Book } from '../book.model';
 import { BookService } from '../book.service';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
@@ -14,7 +14,8 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 export class BookFormComponent {
 
   bookForm: FormGroup;
-  book: Book | null = null;
+  book: Book | undefined;
+  isEditMode: boolean = false;
 
 
   constructor(
@@ -24,34 +25,37 @@ export class BookFormComponent {
     private router: Router
   ) { 
     this.bookForm = this.fb.group({
-      id: [null],
-      title: [''],
-      author: [''],
-      publishedDate: ['']
+      title: ['', Validators.required],
+      author: ['', Validators.required],
+      publishedDate: ['', Validators.required]
     });
   }
 
   ngOnInit(): void {
-    const id = this.route.snapshot.paramMap.get('id');
-    if (id) {
-      this.bookService.getBooks().subscribe(book => {
-        this.book = book.find(b => b.id === id +id) || null;
-        if(this.book){
-          this.bookForm.setValue(this.book);
+    const bookId = this.route.snapshot.paramMap.get('id');
+    if (bookId) {
+      this.isEditMode = true;
+      this.bookService.getBooks().subscribe((books) => {
+        this.book = books.find(book => book.id === +bookId);
+        if (this.book) {
+          this.bookForm.patchValue(this.book);
         }
       });
     }
   }
 
   onSubmit(): void {
-    if (this.bookForm.value.id) {
-      this.bookService.updateBook(this.bookForm.value).subscribe(() => {
-        this.router.navigate(['/']);
-      });
-    } else {
-      this.bookService.addBook(this.bookForm.value).subscribe(() => {
-        this.router.navigate(['/']);
-      });
+    if (this.bookForm.valid) {
+      if (this.isEditMode && this.book) {
+        const updatedBook = { ...this.book, ...this.bookForm.value };
+        this.bookService.updateBook(updatedBook).subscribe(() => {
+          this.router.navigate(['/books']);
+        });
+      } else {
+        this.bookService.addBook(this.bookForm.value).subscribe(() => {
+          this.router.navigate(['/books']);
+        });
+      }
     }
   }
 }

@@ -1,18 +1,19 @@
-<div>
-  <h2>{{ book ? 'Editar Libro' : 'Agregar Libro' }}</h2>
+<div class="book-form">
+  <h2>{{ isEditMode ? 'Editar Libro' : 'Agregar Libro' }}</h2>
   <form [formGroup]="bookForm" (ngSubmit)="onSubmit()">
-    <div>
+    <div class="form-group">
       <label for="title">Título:</label>
       <input id="title" formControlName="title">
     </div>
-    <div>
+    <div class="form-group">
       <label for="author">Autor:</label>
       <input id="author" formControlName="author">
     </div>
-    <div>
+    <div class="form-group">
       <label for="publishedDate">Fecha de Publicación:</label>
       <input id="publishedDate" formControlName="publishedDate">
     </div>
-    <button type="submit">{{ book ? 'Guardar Cambios' : 'Agregar Libro' }}</button>
+    <button type="submit" class="btn submit-btn">{{ isEditMode ? 'Guardar Cambios' : 'Agregar Libro' }}</button>
   </form>
 </div>
+
