@@ -4,16 +4,28 @@
     <div class="form-group">
       <label for="title">Título:</label>
       <input id="title" formControlName="title">
+      <div *ngIf="bookForm.get('title')?.invalid && bookForm.get('title')?.touched" class="error-message">
+        El título es requerido.
+      </div>
     </div>
     <div class="form-group">
       <label for="author">Autor:</label>
       <input id="author" formControlName="author">
+      <div *ngIf="bookForm.get('author')?.invalid && bookForm.get('author')?.touched" class="error-message">
+        El autor es requerido.
+      </div>
     </div>
     <div class="form-group">
       <label for="publishedDate">Fecha de Publicación:</label>
       <input id="publishedDate" formControlName="publishedDate">
+      <div *ngIf="bookForm.get('publishedDate')?.invalid && bookForm.get('publishedDate')?.touched" class="error-message">
+        La fecha de publicación es requerida.
+      </div>
     </div>
     <button type="submit" class="btn submit-btn">{{ isEditMode ? 'Guardar Cambios' : 'Agregar Libro' }}</button>
+    <div *ngIf="formSubmitted && bookForm.invalid" class="error-message">
+      Por favor, rellene todos los campos requeridos.
+    </div>
   </form>
 </div>
 

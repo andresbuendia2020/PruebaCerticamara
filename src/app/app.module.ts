@@ -9,15 +9,14 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 @NgModule({
-  declarations: [
-  ],
+  declarations: [],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-		RouterModule,
-		CommonModule
+    RouterModule,
+    CommonModule,
   ],
-  providers: []
+  providers: [],
 })
 export class AppModule {}
